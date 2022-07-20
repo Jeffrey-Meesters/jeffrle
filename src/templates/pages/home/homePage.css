@@ -1,0 +1,22 @@
+.question-rows-wrapper {
+    margin: 30px 0;
+}
+
+#word-lists ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+#word-lists li {
+    width: 40px;
+    height: 40px;
+    font-size: 70px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+#word-lists li:last-child {
+    margin-right: 0;
+}

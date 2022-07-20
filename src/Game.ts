@@ -1,6 +1,6 @@
 import Word from "./Word"
 
-export default class Game {
+export class Game {
   numberOfTries: number;
   #words: Array<string>;
   #chosenWord: string;
@@ -22,7 +22,7 @@ export default class Game {
     return this.#chosenWord;
   };
 
-  startGame(): void {
+  public startGame(): void {
     // if the textcontent of the btn__reset equals Reset Game then reload the page
     // to reset all values and return false > now the overlay will show with Start Game button
     // if (document.getElementById('btn__reset').textContent === 'Reset Game') {
@@ -32,8 +32,8 @@ export default class Game {
 
     // get a random phrase
     const word = this.getWord();
-    // initialize the Phrase class with the random phrase
-    this.#wordClass = new Word(word);
+    // initialize the Phrase class with the random phrase and tries 0
+    this.#wordClass = new Word(word, 0);
     this.#wordClass.addWordToDisplay();
   }
 }
