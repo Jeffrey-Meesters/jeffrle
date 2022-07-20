@@ -1,15 +1,13 @@
 export default class Word {
     #word: string;
-    #tries: number
 
-    constructor(word: string, tries: number) {
+    constructor(word: string) {
         this.#word = word;
-        this.#tries = tries;
     }
 
-    addWordToDisplay() {
+    addWordToDisplay(tries: number) {
         const wordListwrapper = document.getElementById('word-lists');
-        for (let k = 0; k <= this.#tries; k++) {
+        for (let k = 0; k <= tries; k++) {
             const list = document.createElement("ul");
             list.setAttribute("id", `${k}`)
             for(let i = 0; i < this.#word.length; i++) {

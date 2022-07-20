@@ -23,17 +23,10 @@ export class Game {
   };
 
   public startGame(): void {
-    // if the textcontent of the btn__reset equals Reset Game then reload the page
-    // to reset all values and return false > now the overlay will show with Start Game button
-    // if (document.getElementById('btn__reset').textContent === 'Reset Game') {
-    //   window.location.reload(true);
-    //   return false;
-    // }
-
     // get a random phrase
     const word = this.getWord();
-    // initialize the Phrase class with the random phrase and tries 0
-    this.#wordClass = new Word(word, 0);
-    this.#wordClass.addWordToDisplay();
+    // initialize the Word class with the random phrase and tries 0
+    this.#wordClass = new Word(word);
+    this.#wordClass.addWordToDisplay(this.numberOfTries);
   }
 }
