@@ -12,7 +12,7 @@ export default class Word {
             list.setAttribute("id", `${k}`)
             for(let i = 0; i < this.#word.length; i++) {
                 const listElement = document.createElement("li");
-                listElement.setAttribute("id", `${k}-${i}`)
+                listElement.setAttribute("id", `${k}-${this.#word[i]}`)
                 listElement.classList.add("list-letter")
                 listElement.innerText = "."
                 list?.append(listElement);
@@ -20,5 +20,16 @@ export default class Word {
             wordListwrapper?.append(list);
         }
         
+    }
+
+    checkLetter(letter: string, letterCount: number) {
+        return !!this.#word.match(letter) && this.#word[letterCount] === letter;
+    }
+
+    addLetterToList(letter: string, letterIsInWord: boolean, tries: number) {
+        if (letterIsInWord) {
+            const currentListItem = document.getElementById(`${tries}-${letter}`);
+            currentListItem ? currentListItem.innerText = letter : '';
+        }
     }
 }
