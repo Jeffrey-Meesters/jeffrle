@@ -7,7 +7,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = homePage;
 document.querySelector<HTMLDivElement>('#qwerty-board')!.innerHTML = qwertyBoard
 
 function markButton(event: KeyboardEvent) {
-    console.log(event.key.toLocaleLowerCase())
     game.handleInterAction(event, event.key.toLowerCase())
 }
 
