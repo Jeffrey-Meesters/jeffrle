@@ -1,4 +1,4 @@
-@import "./templates/pages/home/homePage.css";
+@import "../../templates//pages//home/homePage.css";
 
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
@@ -70,7 +70,7 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
-  
+
   button {
     background-color: #f9f9f9;
   }

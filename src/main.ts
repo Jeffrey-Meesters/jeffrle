@@ -1,4 +1,4 @@
-import './style.css';
+import './assets/styles/style.css';
 import homePage from "./templates/pages/home/homePage.html?raw";
 import qwertyBoard from "./templates/components/qwertyBoard.html?raw";
 import {Game} from "./Logic/Game";
