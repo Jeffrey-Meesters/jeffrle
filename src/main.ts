@@ -9,14 +9,30 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = homePage;
 // Add qwerty component to home page
 document.querySelector<HTMLDivElement>('#qwerty-board-letters')!.innerHTML = qwertyBoard;
 
+function makeSureLetterIsALetter(letter:string) {
+    const letterReg = /[a-z]/g;
+    // check if the letter is actually a letter
+    return letter.match(letterReg);
+}
+
 function markButton(event: KeyboardEvent | MouseEvent) {
     if (event instanceof KeyboardEvent) {
-        game.handleInterAction(event.key.toLowerCase());
+        const letter = event.key.toLowerCase();
+
+        // only allow letters
+        if (makeSureLetterIsALetter(letter)) {
+            game.handleInterAction(letter);
+        }
     }
 
     if (event instanceof MouseEvent && event) {
         const targetEvent = (event.target as HTMLElement);
-        game.handleInterAction(targetEvent.innerText);
+        const letter = targetEvent.innerText;
+
+        // Only allow letters (in case user tempers with the html)
+        if(makeSureLetterIsALetter(letter)) {
+            game.handleInterAction(letter);
+        }
     }
 }
 
