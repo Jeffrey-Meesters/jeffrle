@@ -55,7 +55,7 @@ export class Game {
     }
   }
 
-  handleInterAction(event: KeyboardEvent, letter: string): void {
+  handleInterAction(letter: string): void {
     this.#letterCount ++
     this.#wordClass.addLetterToList(letter, this.numberOfTries, this.#letterCount)
 
