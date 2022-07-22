@@ -5,13 +5,15 @@ export class Game {
   #words: Array<string>;
   #chosenWord: string;
   #wordClass: Word;
-  #letterCount = 0
+  #letterCount = 0;
+  #wonOrLost: boolean;
 
   constructor() {
     this.numberOfTries = 0;
     this.#words = ['accept', 'acting', 'famous', 'exceed', 'factor', 'reward']
     this.#chosenWord = "";
     this.#wordClass = {} as Word;
+    this.#wonOrLost = false;
   }
 
   getWord(): string {
@@ -31,15 +33,37 @@ export class Game {
     this.#wordClass.addWordToDisplay(this.numberOfTries);
   }
 
-  handleInterAction(event: KeyboardEvent, letter: string) {
-    const letterIsInWord = this.#wordClass.checkLetter(letter, this.#letterCount)
+  endGame(): void {
+    console.log("You won or lost")
+  }
+
+  checkWin(): void {
+    if (this.#wordClass.currentTypedWord === this.#chosenWord) {
+      console.log("WIN!");
+      this.#wonOrLost = true;
+      return;
+    }
+
+    if (this.numberOfTries === 5 && !this.#wonOrLost) {
+      this.#wonOrLost = true;
+      console.log("LOST!")
+      return;
+    }
+
+    if (this.numberOfTries < 5 && !this.#wonOrLost) {
+      this.#wordClass.addWordToDisplay(this.numberOfTries);
+    }
+  }
+
+  handleInterAction(event: KeyboardEvent, letter: string): void {
     this.#letterCount ++
-    console.log(letterIsInWord)
-    this.#wordClass.addLetterToList(letter, letterIsInWord, this.numberOfTries)
+    this.#wordClass.addLetterToList(letter, this.numberOfTries, this.#letterCount)
 
     if (this.#letterCount === 6) {
       this.#letterCount = 0;
-      this.numberOfTries = 1;
+      this.numberOfTries++;
+
+      this.checkWin()
     }
   }
 }
