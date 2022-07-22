@@ -1,4 +1,5 @@
 import Word from "./Word"
+import Words from './Words'
 
 export class Game {
   numberOfTries: number;
@@ -10,7 +11,7 @@ export class Game {
 
   constructor() {
     this.numberOfTries = 0;
-    this.#words = ['accept', 'acting', 'famous', 'exceed', 'factor', 'reward'];
+    this.#words = [];
     this.#chosenWord = "";
     this.#wordClass = {} as Word;
     this.#wonOrLost = false;
@@ -26,6 +27,9 @@ export class Game {
   };
 
   public startGame(): void {
+    const words = new Words(6);
+    this.#words = words.getWords();
+
     // get a random phrase
     const word = this.getWord();
     // initialize the Word class with the random phrase and tries 0
