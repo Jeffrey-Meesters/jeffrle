@@ -3,10 +3,17 @@
     margin: 30px 0;
 }
 
+#word-lists {
+    display: flex;
+    flex-direction: column;
+}
+
 #word-lists ul {
     display: flex;
     justify-content: center;
-    list-style: none;
+    list-style-type: none;
+    margin: 15px 0 0 0;
+    padding: 0;
 }
 
 #word-lists li:last-child {
@@ -14,12 +21,18 @@
 }
 
 .list-letter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     width: 40px;
     height: 40px;
-    font-size: 70px;
+    font-size: 40px;
     border: 2px solid #fff;
     border-radius: 5px;
     margin-right: 5px;
+    padding: 5px;
 }
 
 .list-letter.border-green {
@@ -28,4 +41,29 @@
 
 .list-letter.border-yellow {
     border: 2px solid yellow;
+}
+
+.qwerty-board-letters {
+    width: 300px;
+}
+
+.keyrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+@media only screen and (max-width: 530px) {
+    .list-letter {
+        padding: 0 0 10px 0;
+    }
+
+    .page {
+        max-width: 280px;
+    }
+
+    .question-rows-wrapper {
+        margin: 30px -10px
+    }
 }

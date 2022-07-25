@@ -29,9 +29,6 @@ export default class Word {
         }
 
         wordListwrapper?.append(list);
-        
-        // Temporary to show word thus make development easier
-        wordListwrapper?.append(`${this.#word}`);
     }
 
     private checkLetter(letter: string, letterCount: number, currentListItem: HTMLElement | null): void {
