@@ -1,3 +1,6 @@
+import wonGame from "../templates/components/gameWon.html?raw";
+import lostGame from "../templates/components/gameLost.html?raw";
+
 export default class Word {
     #word: string;
     currentTypedWord: string;
@@ -72,5 +75,24 @@ export default class Word {
 
         // Check letter for style updates
         this.checkLetter(letter, count, currentListItem);
+    }
+
+    showWord(result: boolean): void {
+        const wordListwrapper = document.getElementById('word-lists');
+
+        if (!wordListwrapper) return;
+
+        wordListwrapper.innerHTML = result ? wonGame : lostGame;
+
+        const list = document.createElement("ul");
+
+        for(let i = 0; i < this.#word.length; i++) {
+            const listElement = document.createElement("li");
+            listElement.classList.add("list-letter", `${result ? 'won' : 'lost'}`)
+            listElement.innerText = this.#word[i];
+            list?.append(listElement);
+        }
+
+        wordListwrapper.append(list);
     }
 }

@@ -2,6 +2,8 @@ import './assets/styles/style.css';
 import homePage from "./templates/pages/home/homePage.html?raw";
 import qwertyBoard from "./templates/components/qwertyBoard.html?raw";
 import {Game} from "./Logic/Game";
+// Make a new instance of the Game
+const game = new Game();
 
 // Add home page to main page
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = homePage;
@@ -40,9 +42,12 @@ function markButton(event: KeyboardEvent | MouseEvent) {
 document.addEventListener("keypress", markButton);
 
 // eventlistener that listens for clicks on the onscreen buttons
-document.querySelector<HTMLDivElement>('#qwerty-board-letters')?.addEventListener('click', markButton);
+document.querySelector<HTMLDivElement>('#qwerty-board-letters .key')?.addEventListener('click', markButton);
 
-// Make a new instance of the Game
-const game = new Game();
+// Reload the page to reset the game
+document.querySelector<HTMLDivElement>('#restart')?.addEventListener('click', () => window.location.reload());
+
+document.querySelector<HTMLDivElement>('#reveal')?.addEventListener('click', () => game.revealWord());
+
 // Start the Game
 game.startGame();

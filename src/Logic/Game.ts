@@ -55,24 +55,28 @@ export class Game {
     }
   }
 
-  private endGame(): void {
-    console.log("You won or lost");
+  public revealWord() {
+    this.endGame(null)
+  }
+
+  private endGame(result: boolean | null): void {
+    this.numberOfTries = 6;
+    this.#wonOrLost = true;
+    this.#wordClass.showWord(!!result);
   }
 
   private checkWin(): void {
     // When the currently typed word equals the word of the game the user has won
     if (this.#wordClass.currentTypedWord === this.#chosenWord) {
       console.log("WIN!");
-      this.#wonOrLost = true;
-      this.endGame();
+      this.endGame(true);
       return;
     }
 
     // If the user has tried 5 times and has not won yet, the user has lost
     if (this.numberOfTries === 5 && !this.#wonOrLost) {
-      this.#wonOrLost = true;
       console.log("LOST!");
-      this.endGame();
+      this.endGame(false);
       return;
     }
 

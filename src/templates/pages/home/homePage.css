@@ -32,16 +32,22 @@
     border: 2px solid #fff;
     border-radius: 5px;
     margin-right: 5px;
-    padding: 5px;
+    padding: 10px 5px;
 }
 
-.list-letter.border-green {
+.list-letter.border-green,
+.list-letter.won {
     border: 2px solid green;
 }
 
 .list-letter.border-yellow {
     border: 2px solid yellow;
 }
+
+.list-letter.lost {
+    border: 2px solid red;
+}
+
 
 .qwerty-board-letters {
     width: 300px;
@@ -50,13 +56,16 @@
 .keyrow {
     display: flex;
     justify-content: center;
-    align-items: center;
-
+    align-items: center;   
 }
 
+.playbuttons {
+    justify-content: space-between;
+    margin-bottom: 2px;
+}
 @media only screen and (max-width: 530px) {
     .list-letter {
-        padding: 0 0 10px 0;
+        padding: 5px 0 5px 0;
     }
 
     .page {
