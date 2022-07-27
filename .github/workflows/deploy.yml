@@ -61,11 +61,15 @@ jobs:
 
           # navigate into the build output directory
           echo build done, checking out dist
-          git add dist -f
+          cd dist
           
-          echo commiting deployment
+          git init
+          git checkout -b main
+          git add -A
           git commit -m 'deploy'
 
           echo deploying to gh-pages
           # if you are deploying to https://<USERNAME>.github.io/<REPO>
           git push -f https://Jeffrey-Meesters:${{secrets.DEPLOY_KEY}}@github.com/Jeffrey-Meesters/jeffrle main:gh-pages
+
+          cd -
