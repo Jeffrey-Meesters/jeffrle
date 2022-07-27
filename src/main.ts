@@ -17,7 +17,7 @@ function makeSureLetterIsALetter(letter:string) {
     return letter.match(letterReg);
 }
 
-function markButton(event: KeyboardEvent | MouseEvent) {
+function markButton(event: KeyboardEvent | MouseEvent| TouchEvent) {
     if (event instanceof KeyboardEvent) {
         const letter = event.key.toLowerCase();
 
@@ -42,7 +42,8 @@ function markButton(event: KeyboardEvent | MouseEvent) {
 document.addEventListener("keypress", markButton);
 
 // eventlistener that listens for clicks on the onscreen buttons
-document.querySelector<HTMLDivElement>('#qwerty-board-letters .key')?.addEventListener('click', markButton);
+document.querySelectorAll<HTMLDivElement>(".key").forEach(element => element?.addEventListener('click', markButton))
+// document.querySelector<HTMLDivElement>('#qwerty-board-letters')?.addEventListener('click', '.key', markButton);
 
 // Reload the page to reset the game
 document.querySelector<HTMLDivElement>('#restart')?.addEventListener('click', () => window.location.reload());
