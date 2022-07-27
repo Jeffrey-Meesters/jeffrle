@@ -68,4 +68,4 @@ jobs:
 
           echo deploying to gh-pages
           # if you are deploying to https://<USERNAME>.github.io/<REPO>
-          git push -f https://Jeffrey-Meesters:${{secrets.DEPLOY_KEY}}@github.com:Jeffrey-Meesters/jeffrle main:gh-pages
+          git push -f https://Jeffrey-Meesters:${{secrets.DEPLOY_KEY}}@github.com/Jeffrey-Meesters/jeffrle main:gh-pages
