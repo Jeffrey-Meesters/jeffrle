@@ -34,8 +34,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - run: |
-          git config user.name Jeffrey Meesters
-          git config user.email jjeffreymeesters@gmail.com
+          git config --local user.name Jeffrey Meesters
+          git config --local user.email jjeffreymeesters@gmail.com
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
