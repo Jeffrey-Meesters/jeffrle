@@ -3,16 +3,23 @@ import lostGame from "../templates/components/gameLost.html?raw";
 
 export default class Word {
     #word: string;
+    #guessedLetters: Array<string>;
     currentTypedWord: string;
 
     constructor(word: string) {
         this.#word = word;
+        this.#guessedLetters = [];
         this.currentTypedWord = "";
+
+        // update the guesses array with the amount of letters with empty strings
+        // So that other methods can safely use the indexes
+        for(let i = 0; i < word.length; i++) {
+            this.#guessedLetters.push("");
+        }
     }
 
     public addWordToDisplay(tries: number): void {
-        // A new line has started so reset the current typed word by the user
-        this.currentTypedWord = "";
+        console.log(this.#guessedLetters);
         const wordListwrapper = document.getElementById('word-lists');
         const list = document.createElement("ul");
 
@@ -25,24 +32,28 @@ export default class Word {
 
             // the id is the current try and the index of the letter in the word + 1
             // For future reference
-            listElement.setAttribute("id", `${tries}-${i + 1}`)
-            listElement.classList.add("list-letter")
-            listElement.innerText = "."
+            listElement.setAttribute("id", `${tries}-${i + 1}`);
+            listElement.classList.add("list-letter");
+            listElement.classList.toggle("border-green", !!this.#guessedLetters[i]);
+            listElement.innerText = this.#guessedLetters[i] || ".";
             list?.append(listElement);
         }
 
         wordListwrapper?.append(list);
+
+        // A new line has started so reset the current typed word by the user
+        this.currentTypedWord = "";
     }
 
+    // Update the guessed letters array to keep track
+    private updateGuessedLetters(letter: string, letterPosition: number) {
+        this.#guessedLetters[letterPosition] = letter;
+    }
+
+    // Check if the letter is in the word and/or in the correct place and update styles
     private checkLetter(letter: string, letterCount: number, currentListItem: HTMLElement | null): void {
         // Something is wrong with the game
         if (!currentListItem) {
-            return;
-        }
-
-        // The typed letter is in exactly the same place as in the word of the game
-        if (this.#word[letterCount -1] === letter) {
-            currentListItem.classList.add("border-green");
             return;
         }
 
@@ -51,6 +62,17 @@ export default class Word {
 
         // Count how many times a letter exists in the word typed by the user
         const occurencesInTypedWord = this.currentTypedWord.split(letter).length -1;
+
+        // When the word is added to the display an correct guessed letter may be present
+        // If it is overwriten remove it so the next line part of the code is able to highlight it properly again
+        currentListItem.classList.remove("border-green");
+
+        // The typed letter is in exactly the same place as in the word of the game
+        if (this.#word[letterCount -1] === letter) {
+            this.updateGuessedLetters(letter, (letterCount - 1));
+            currentListItem.classList.add("border-green");
+            return;
+        }
 
         // When the letter is in the word of the game and the letter count in the word typed by the user
         // is lower than or equal to the occurences in the word of the game update the class
@@ -77,6 +99,7 @@ export default class Word {
         this.checkLetter(letter, count, currentListItem);
     }
 
+    // Depending on the result show a winning or losing screen with the word
     showWord(result: boolean): void {
         const wordListwrapper = document.getElementById('word-lists');
 
