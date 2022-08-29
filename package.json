@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "rollup-plugin-javascript-obfuscator": "^1.0.4",
     "typescript": "^4.6.4",
     "vite": "^3.0.0"
   }
