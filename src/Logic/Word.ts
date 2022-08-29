@@ -71,6 +71,12 @@ export default class Word {
         if (this.#word[letterCount -1] === letter) {
             this.updateGuessedLetters(letter, (letterCount - 1));
             currentListItem.classList.add("border-green");
+
+            // Go back over the current typed list to see if
+            // - the correct letter was already typed and has a yellow border
+            // - when it has a yellow border check if it should stay
+            //      - it should stay when the letter is still multiple times in the word and not all are guessed>
+            //      - it should be removed if the amount of correct guesses has been reached for the letter
             return;
         }
 

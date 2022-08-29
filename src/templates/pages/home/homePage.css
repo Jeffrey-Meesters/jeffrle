@@ -76,3 +76,13 @@
         margin: 30px -10px
     }
 }
+
+@media (prefers-color-scheme: light) { 
+    .list-letter {
+        border: 2px solid #f9f9f9;
+     }
+
+     .list-letter.border-yellow {
+        border: 2px solid #fadb52
+     }
+}
