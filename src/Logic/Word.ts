@@ -19,7 +19,6 @@ export default class Word {
     }
 
     public addWordToDisplay(tries: number): void {
-        console.log(this.#guessedLetters);
         const wordListwrapper = document.getElementById('word-lists');
         const list = document.createElement("ul");
 
@@ -50,6 +49,37 @@ export default class Word {
         this.#guessedLetters[letterPosition] = letter;
     }
 
+    private occurencesInWord(letter: string) {
+        return this.#word.split(letter).length -1;
+    }
+
+    private occurencesInTypedWord(letter: string) {
+        return this.currentTypedWord.split(letter).length -1;
+    }
+
+    private updateColorCues(foundLetter: string, letterCount: number) {
+        // Go back over the current typed list to see if
+        // - the correct letter was already typed and has a yellow border
+        // - when it has a yellow border check if it should stay
+        //      - it should stay when the letter is still multiple times in the word and not all are guessed>
+        //      - it should be removed if the amount of correct guesses has been reached for the letter
+        
+        const wordListsElem = document.querySelector('#word-lists');
+        const currentListChildren = wordListsElem?.lastChild?.childNodes;
+
+        // loop over all li elements before the current input
+        for (let i = 0; i < (letterCount -1 ); i++) {
+            
+            // if a li element has the same letter AND has the border yellow remove it
+            // if the letter is repeated but also multiple times with a yellow border it will be removed in the next itteration on correct input
+            if (currentListChildren?.[i].textContent === foundLetter && (currentListChildren?.[i] as HTMLUListElement).classList.contains('border-yellow')) {
+                (currentListChildren?.[i] as HTMLUListElement).classList.remove('border-yellow');
+                break;
+            }
+        }
+        
+    }
+
     // Check if the letter is in the word and/or in the correct place and update styles
     private checkLetter(letter: string, letterCount: number, currentListItem: HTMLElement | null): void {
         // Something is wrong with the game
@@ -58,10 +88,10 @@ export default class Word {
         }
 
         // Count how many times a letter exists in the word of the game
-        const occurencesInWord = this.#word.split(letter).length -1;
+        const occurencesInWord = this.occurencesInWord(letter)
 
         // Count how many times a letter exists in the word typed by the user
-        const occurencesInTypedWord = this.currentTypedWord.split(letter).length -1;
+        const occurencesInTypedWord = this.occurencesInTypedWord(letter);
 
         // When the word is added to the display an correct guessed letter may be present
         // If it is overwriten remove it so the next line part of the code is able to highlight it properly again
@@ -72,11 +102,7 @@ export default class Word {
             this.updateGuessedLetters(letter, (letterCount - 1));
             currentListItem.classList.add("border-green");
 
-            // Go back over the current typed list to see if
-            // - the correct letter was already typed and has a yellow border
-            // - when it has a yellow border check if it should stay
-            //      - it should stay when the letter is still multiple times in the word and not all are guessed>
-            //      - it should be removed if the amount of correct guesses has been reached for the letter
+            this.updateColorCues(letter, letterCount)
             return;
         }
 

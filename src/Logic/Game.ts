@@ -68,14 +68,12 @@ export class Game {
   private checkWin(): void {
     // When the currently typed word equals the word of the game the user has won
     if (this.#wordClass.currentTypedWord === this.#chosenWord) {
-      console.log("WIN!");
       this.endGame(true);
       return;
     }
 
     // If the user has tried 5 times and has not won yet, the user has lost
     if (this.numberOfTries === 5 && !this.#wonOrLost) {
-      console.log("LOST!");
       this.endGame(false);
       return;
     }
