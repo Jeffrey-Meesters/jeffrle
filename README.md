@@ -11,4 +11,4 @@ Jeffrle is hosted via github pages and can be played [here](https://jeffrey-mees
 
 ## Vite alterations so far
 1. I've set a different base url as gethub actions was not able to create a usable deployment with absolut url which turned the bundled code into using relative urls
-2. I've added a package [rollup-plugin-javascript-obfuscator](https://www.npmjs.com/package/rollup-plugin-javascript-obfuscator) that obfuscates the code so it is harder to read by a human in the browser. You can find it's output in the `some.js` file. However I have not yet __*tried*__ to figure out how to wire it up so it is not actually used at the moment.
+2. I've added a package [rollup-plugin-javascript-obfuscator](https://www.npmjs.com/package/rollup-plugin-javascript-obfuscator) that obfuscates the code so it is harder to read by a human in the browser.
